@@ -1,0 +1,72 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@LuizAGDomingues 
+rocketseat-education
+/
+ignite-lab-design-system
+Public
+Code
+Issues
+Pull requests
+Actions
+Projects
+Security
+Insights
+ignite-lab-design-system/.github/workflows/deploy-docs.yml
+@diego3g
+diego3g ci: Use legacy peer deps
+Latest commit dfe0261 6 days ago
+ History
+ 1 contributor
+30 lines (23 sloc)  632 Bytes
+
+name: Deploy Storybook
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Build Storybook
+        run: npm run build-storybook
+
+      - name: Deploy Storybook
+        run: npm run deploy-storybook -- --ci --existing-output-dir=storybook-static
+        env:
+          GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
+Footer
+© 2022 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+ignite-lab-design-system/deploy-docs.yml at main · rocketseat-education/ignite-lab-design-system
