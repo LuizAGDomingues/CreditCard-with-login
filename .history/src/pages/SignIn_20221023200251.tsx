@@ -1,6 +1,7 @@
-import { FormEvent} from 'react';
-import { Link } from 'react-router-dom'
+import { FormEvent, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom'
 import { Envelope, Lock } from 'phosphor-react';
+import axios from 'axios';
 import { Button } from '../components/Button';
 import { Checkbox } from '../components/Checkbox';
 import { Heading } from '../components/Heading';
@@ -9,10 +10,12 @@ import { Text } from '../components/Text';
 import { TextInput } from '../components/TextInput';
 
 export function SignIn() {
+  const [isUserSignedIn, setIsUserSignedIn] = useState(false)
+  const navigate = useNavigate();
 
   async function handleSignIn(event: FormEvent) {
     event.preventDefault();
-    window.location.replace("https://rocketpay-creditcard.vercel.app");
+    navigate('https://rocketpay-creditcard.vercel.app');
   }
 
   return (
@@ -23,7 +26,7 @@ export function SignIn() {
         <Text size='lg' className='text-gray-400 mt-2'>Faça login e comece a usar!</Text>
       </header>
       <form onSubmit={handleSignIn} className='flex flex-col items-stretch w-full gap-4 max-w-sm mt-10'>
-
+        {isUserSignedIn && <Text>Login realizado!</Text>} 
         <label htmlFor="email" className='flex flex-col gap-3'>
           <Text className='font-semibold'>Endereço de email</Text>
           <TextInput.Root>

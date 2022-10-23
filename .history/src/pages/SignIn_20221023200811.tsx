@@ -12,7 +12,7 @@ export function SignIn() {
 
   async function handleSignIn(event: FormEvent) {
     event.preventDefault();
-    window.location.replace("https://rocketpay-creditcard.vercel.app");
+    window.location.replace();
   }
 
   return (
