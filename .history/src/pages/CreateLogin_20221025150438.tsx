@@ -1,16 +1,25 @@
+import { FormEvent, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Envelope, Lock } from 'phosphor-react';
-import { Button } from '../components/Button';
 import { Heading } from '../components/Heading';
 import { LogoCreateLogin } from '../components/LogoCreateLogin';
 import { Text } from '../components/Text';
 import { TextInput } from '../components/TextInput';
+import CreateLoginModal from '../components/CreateLoginModal';
+import { validateForm } from '../services/validationFunctions';
 
 export function CreateLogin() {
   const history = useNavigate();
+  const [accountName, setAccountName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [enableSubmit, setEnableSubmit] = useState('disable');
 
-  function handleCreateLogin(){
-    history("/");
+  function handleCreateLogin(event: FormEvent){
+    event.preventDefault();
+    validateForm({accountName, email, password, confirmPassword});
+    // history("/");
   }
 
   return (
@@ -20,17 +29,11 @@ export function CreateLogin() {
         <Heading />
         <Text size='lg' className='text-gray-400 mt-2'>Crie sua conta abaixo e aproveite!</Text>
       </header>
-      <form className='flex flex-col items-stretch w-full gap-4 max-w-sm mt-10'>
-        <label htmlFor="name" className='flex flex-col gap-3'>
+      <form onSubmit={handleCreateLogin} className='flex flex-col items-stretch w-full gap-4 max-w-sm mt-10'>
+        <label htmlFor="text" className='flex flex-col gap-3'>
           <Text className='font-semibold'>Nome</Text>
           <TextInput.Root>
-            <TextInput.Input type='name' id='name' placeholder='Luiz' />
-          </TextInput.Root>
-        </label>
-        <label htmlFor="lastName" className='flex flex-col gap-3'>
-          <Text className='font-semibold'>Sobrenome</Text>
-          <TextInput.Root>
-            <TextInput.Input type='lastName' id='lastName' placeholder='Domingues' />
+            <TextInput.Input type='text' id='name' placeholder='Luiz' onChange={(e) => setAccountName(e.target.value)}/>
           </TextInput.Root>
         </label>
         <label htmlFor="email" className='flex flex-col gap-3'>
@@ -39,7 +42,7 @@ export function CreateLogin() {
             <TextInput.Icon>
               <Envelope />
             </TextInput.Icon>
-            <TextInput.Input type='email' id='email' placeholder='exemplo@email.com' />
+            <TextInput.Input type='email' id='email' placeholder='exemplo@email.com' onChange={(e) => setEmail(e.target.value)}/>
           </TextInput.Root>
         </label>
         <label htmlFor="password" className='flex flex-col gap-3'>
@@ -48,7 +51,7 @@ export function CreateLogin() {
             <TextInput.Icon>
               <Lock />
             </TextInput.Icon>
-            <TextInput.Input type='password' id='password' placeholder='********' />
+            <TextInput.Input type='password' id='password' placeholder='********' onChange={(e) => setPassword(e.target.value)}/>
           </TextInput.Root>
         </label>
         <label htmlFor="password" className='flex flex-col gap-3'>
@@ -57,10 +60,12 @@ export function CreateLogin() {
             <TextInput.Icon>
               <Lock />
             </TextInput.Icon>
-            <TextInput.Input type='password' id='rePassword' placeholder='********' />
+            <TextInput.Input type='password' id='confirmPassword' placeholder='********' onChange={(e) => setConfirmPassword(e.target.value)}/>
           </TextInput.Root>
         </label>
-        <Button type='submit' onClick={handleCreateLogin} className='mt-4'>Criar sua conta</Button>
+        <div className='disabled disabled:opac'>
+          <CreateLoginModal accountName={accountName} enable={enableSubmit} />
+        </div>
       </form>
     </div>
   )
