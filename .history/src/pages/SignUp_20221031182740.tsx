@@ -73,7 +73,7 @@ export function SignUp() {
         <Button type='submit' className='mt-4'>Criar sua conta</Button>
       </form>
       { enableModalCreateUser ?
-        <Modal className='flex-col justify-between'>
+        <Modal className='flex-col jus'>
           <Text size='lg' className='mt-3'>Conta criada com sucesso!</Text>
           <Text>Seja bem vindo {accountName}</Text>
           <button type='button' onClick={(e) => history("/")} className='mb-5 py-2 px-3 bg-cyan-300 rounded font-semibold text-black text-sm transition-colors hover:ring-2 focus:ring-2 ring-white'>Continuar</button>
@@ -81,7 +81,7 @@ export function SignUp() {
         : null
       }
       { enableModalError ?
-        <Modal className='justify-center'>
+        <Modal>
           <Text>Preencha todos os campos corretamente</Text>
           <button type='button' onClick={(e) => setEnableModalError(false)} className='mb-5 py-2 px-3 bg-cyan-300 rounded font-semibold text-black text-sm transition-colors hover:ring-2 focus:ring-2 ring-white'>Ok</button>
         </Modal>

@@ -81,7 +81,7 @@ export function SignUp() {
         : null
       }
       { enableModalError ?
-        <Modal className='justify-center'>
+        <Modal>
           <Text>Preencha todos os campos corretamente</Text>
           <button type='button' onClick={(e) => setEnableModalError(false)} className='mb-5 py-2 px-3 bg-cyan-300 rounded font-semibold text-black text-sm transition-colors hover:ring-2 focus:ring-2 ring-white'>Ok</button>
         </Modal>
