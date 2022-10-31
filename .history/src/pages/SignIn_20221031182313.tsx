@@ -7,7 +7,6 @@ import { Heading } from '../components/Heading';
 import { LogoSignIn } from '../components/LogoSignIn';
 import { Text } from '../components/Text';
 import { TextInput } from '../components/TextInput';
-import { Modal } from '../components/Modal';
 import { validadeSignInForm } from '../services/validationFunctions';
 import { loginUser } from '../services/firebase';
 

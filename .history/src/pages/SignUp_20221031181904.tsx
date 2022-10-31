@@ -29,6 +29,10 @@ export function SignUp() {
     }
   }
 
+  function handleBackToSignIn(){
+    history("/");
+  }
+
   return (
     <div className='w-screen h-screen bg-gray-900 flex flex-col items-center justify-center text-gray-100'>
       <LogoSignUp />
@@ -76,16 +80,14 @@ export function SignUp() {
         <Modal>
           <Text size='lg' className='mt-3'>Conta criada com sucesso!</Text>
           <Text>Seja bem vindo {accountName}</Text>
-          <button type='button' onClick={(e) => history("/")} className='mb-5 py-2 px-3 bg-cyan-300 rounded font-semibold text-black text-sm transition-colors hover:ring-2 focus:ring-2 ring-white'>Continuar</button>
+          <button type='button' onClick={handleBackToSignIn} className='mb-5 py-2 px-3 bg-cyan-300 rounded font-semibold text-black text-sm transition-colors hover:ring-2 focus:ring-2 ring-white'>Continuar</button>
         </Modal>
-        : null
-      }
+        : null}
       { enableModalError ?
         <Modal>
           <Text>Preencha todos os campos corretamente</Text>
-          <button type='button' onClick={(e) => setEnableModalError(false)} className='mb-5 py-2 px-3 bg-cyan-300 rounded font-semibold text-black text-sm transition-colors hover:ring-2 focus:ring-2 ring-white'>Ok</button>
+          
         </Modal>
-        : null
       }
     </div>
   )

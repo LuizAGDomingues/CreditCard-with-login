@@ -7,12 +7,11 @@ import { Heading } from '../components/Heading';
 import { LogoSignIn } from '../components/LogoSignIn';
 import { Text } from '../components/Text';
 import { TextInput } from '../components/TextInput';
-import { Modal } from '../components/Modal';
 import { validadeSignInForm } from '../services/validationFunctions';
 import { loginUser } from '../services/firebase';
 
 export function SignIn() {
-  const [enableModalError, setEnableModalError] = useState(false);
+  const [setModalErro, ]
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -21,7 +20,7 @@ export function SignIn() {
     if (validadeSignInForm({email, password})){
       loginUser({email, password});
     } else{
-      setEnableModalError(true)
+      alert("Preencha os campos vazios")
     }
   }
 
@@ -66,13 +65,6 @@ export function SignIn() {
           <Link to="/signup" className='text-gray-400 underline hover:text-gray-200'>Não possui conta? Crie uma agora!</Link>
         </Text>
       </footer>
-      { enableModalError ?
-        <Modal>
-          <Text>Preencha todos os campos corretamente</Text>
-          <button type='button' onClick={(e) => setEnableModalError(false)} className='mb-5 py-2 px-3 bg-cyan-300 rounded font-semibold text-black text-sm transition-colors hover:ring-2 focus:ring-2 ring-white'>Ok</button>
-        </Modal>
-        : null
-      }
     </div>
   )
 }

@@ -6,14 +6,13 @@ import { LogoSignUp } from '../components/LogoSignUp';
 import { Text } from '../components/Text';
 import { TextInput } from '../components/TextInput';
 import { Button } from '../components/Button';
-import { Modal } from '../components/Modal';
+import { Modal }
 import { validateSignUpForm } from '../services/validationFunctions';
 import { createUser } from '../services/firebase';
 
 export function SignUp() {
   const history = useNavigate();
-  const [enableModalCreateUser, setEnableModalCreateUser] = useState(false);
-  const [enableModalError, setEnableModalError] = useState(false);
+  const [enableModal, setEnableModal] = useState(false);
   const [accountName, setAccountName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,11 +21,15 @@ export function SignUp() {
   function handleSignUp(event: FormEvent){
     event.preventDefault();
     if (validateSignUpForm({accountName, email, password, confirmPassword})){
-      setEnableModalCreateUser(true);
+      setEnableModal(true);
       createUser({email, password});
     } else {
-      setEnableModalError(true);
+      alert('Preencha todos os campos corretamente')
     }
+  }
+
+  function handleBackToSignIn(){
+    history("/");
   }
 
   return (
@@ -72,21 +75,13 @@ export function SignUp() {
         </label>
         <Button type='submit' className='mt-4'>Criar sua conta</Button>
       </form>
-      { enableModalCreateUser ?
-        <Modal>
+      { enableModal ?
+        <div className='bg-gray-800 w-[420px] h-[300px] flex flex-col items-center justify-between rounded border border-cyan-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
           <Text size='lg' className='mt-3'>Conta criada com sucesso!</Text>
           <Text>Seja bem vindo {accountName}</Text>
-          <button type='button' onClick={(e) => history("/")} className='mb-5 py-2 px-3 bg-cyan-300 rounded font-semibold text-black text-sm transition-colors hover:ring-2 focus:ring-2 ring-white'>Continuar</button>
-        </Modal>
-        : null
-      }
-      { enableModalError ?
-        <Modal>
-          <Text>Preencha todos os campos corretamente</Text>
-          <button type='button' onClick={(e) => setEnableModalError(false)} className='mb-5 py-2 px-3 bg-cyan-300 rounded font-semibold text-black text-sm transition-colors hover:ring-2 focus:ring-2 ring-white'>Ok</button>
-        </Modal>
-        : null
-      }
+          <button type='button' onClick={handleBackToSignIn} className='mb-5 py-2 px-3 bg-cyan-300 rounded font-semibold text-black text-sm transition-colors hover:ring-2 focus:ring-2 ring-white'>Continuar</button>
+        </div>
+        : null}
     </div>
   )
 }

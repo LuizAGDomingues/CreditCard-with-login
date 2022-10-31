@@ -7,7 +7,6 @@ import { Heading } from '../components/Heading';
 import { LogoSignIn } from '../components/LogoSignIn';
 import { Text } from '../components/Text';
 import { TextInput } from '../components/TextInput';
-import { Modal } from '../components/Modal';
 import { validadeSignInForm } from '../services/validationFunctions';
 import { loginUser } from '../services/firebase';
 
@@ -67,12 +66,8 @@ export function SignIn() {
         </Text>
       </footer>
       { enableModalError ?
-        <Modal>
-          <Text>Preencha todos os campos corretamente</Text>
-          <button type='button' onClick={(e) => setEnableModalError(false)} className='mb-5 py-2 px-3 bg-cyan-300 rounded font-semibold text-black text-sm transition-colors hover:ring-2 focus:ring-2 ring-white'>Ok</button>
-        </Modal>
-        : null
-      }
+      
+    }
     </div>
   )
 }

@@ -29,6 +29,10 @@ export function SignUp() {
     }
   }
 
+  function handleBackToSignIn(){
+    history("/");
+  }
+
   return (
     <div className='w-screen h-screen bg-gray-900 flex flex-col items-center justify-center text-gray-100'>
       <LogoSignUp />
